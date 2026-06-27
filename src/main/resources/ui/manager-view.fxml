@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="managerBox" alignment="TOP_CENTER" prefHeight="1000.0" prefWidth="1000.0" spacing="15" styleClass="login-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.ManagerViewController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10">
+        <ImageView fitHeight="50" fitWidth="50">
+            <image>
+                <Image url="@../images/logo.png" /> </image>
+        </ImageView>
+        <Label styleClass="welcome-title" text="Панель Менеджера" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="btn-secondary" text="Выйти" />
+    </HBox>
+    <Label styleClass="subtitle" text="Управление операциями фитнес-центра" />
+
+    <TabPane fx:id="tabPane" stylesheets="@style.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <Tab text="Клиенты">
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <TextField fx:id="clientSearchField" promptText="Поиск по ФИО или телефону" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="clientSearchButton" onAction="#handleClientSearch" styleClass="btn-primary" text="Поиск" />
+                    <Button fx:id="clientRefreshButton" onAction="#refreshClientTable" styleClass="btn-secondary" text="Обновить" />
+                </HBox>
+                <TableView fx:id="clientTable" prefHeight="400" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="clientLastNameColumn" prefWidth="120" text="Фамилия" />
+                        <TableColumn fx:id="clientFirstNameColumn" prefWidth="100" text="Имя" />
+                        <TableColumn fx:id="clientPatronymicColumn" prefWidth="120" text="Отчество" />
+                        <TableColumn fx:id="clientEmailColumn" prefWidth="150" text="Email" />
+                        <TableColumn fx:id="clientPhoneColumn" prefWidth="120" text="Телефон" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <Pagination fx:id="clientPagination" />
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Button fx:id="editClientButton" onAction="#handleEditClient" styleClass="btn-primary" text="Редактировать клиента" />
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Продажи абонементов">
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <TextField fx:id="saleSearchField" promptText="Поиск по клиенту или абонементу" styleClass="text-input" HBox.hgrow="ALWAYS" />
+                    <Button fx:id="saleSearchButton" onAction="#handleSaleSearch" styleClass="btn-primary" text="Поиск" />
+                    <Button fx:id="saleRefreshButton" onAction="#refreshSaleTable" styleClass="btn-secondary" text="Обновить" />
+                </HBox>
+                <TableView fx:id="saleTable" prefHeight="400" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="saleClientColumn" prefWidth="200" text="Клиент (ФИО)" />
+                        <TableColumn fx:id="saleSubscriptionColumn" prefWidth="150" text="Абонемент" />
+                        <TableColumn fx:id="saleFitnessCenterColumn" text="Филиал" />
+                        <TableColumn fx:id="saleStartDateColumn" prefWidth="100" text="Дата начала" />
+                        <TableColumn fx:id="saleEndDateColumn" prefWidth="100" text="Дата окончания" />
+                        <TableColumn fx:id="salePriceColumn" prefWidth="100" text="Итоговая цена" />
+                        <TableColumn fx:id="saleDiscountColumn" prefWidth="100" text="Скидка" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <Pagination fx:id="salePagination" />
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <Button fx:id="createSaleButton" onAction="#handleCreateSale" styleClass="btn-primary" text="Оформить продажу" />
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Тренеры и Расписание">
+            <HBox spacing="10" style="-fx-padding: 10;" VBox.vgrow="ALWAYS">
+                <VBox prefWidth="350" spacing="10" HBox.hgrow="ALWAYS">
+               <HBox alignment="CENTER">
+                  <children>
+                          <Label style="-fx-font-weight: bold;" styleClass="subtitle" text="Список тренеров:" />
+                  </children>
+               </HBox>
+                    <TableView fx:id="trainerTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="trainerIdColumn" prefWidth="40" text="ID" />
+                            <TableColumn fx:id="trainerFullNameColumn" prefWidth="310.0" text="ФИО тренера" />
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+               <HBox alignment="CENTER">
+                  <children>
+                          <Button fx:id="assignClientToTrainerButton" onAction="#handleAssignClientToTrainer" styleClass="btn-primary" text="Записать клиента к тренеру" />
+                  </children>
+               </HBox>
+                </VBox>
+                <VBox prefWidth="550" spacing="10" HBox.hgrow="ALWAYS">
+               <HBox alignment="CENTER">
+                  <children>
+                          <Label style="-fx-font-weight: bold;" styleClass="subtitle" text="Расписание выбранного тренера:" />
+                  </children>
+               </HBox>
+                    <HBox alignment="CENTER" spacing="10.0">
+                        <Label text="Фильтр по дате:" />
+                        <DatePicker fx:id="scheduleDateFilterPicker" promptText="Выберите дату" />
+                        <Button onAction="#handleFilterTrainerScheduleByDate" styleClass="btn-small" stylesheets="@style.css" text="Применить" />
+                    </HBox>
+                    <TableView fx:id="scheduleTable" prefHeight="350">
+                        <columns>
+                            <TableColumn fx:id="scheduleIdColumn" text="ID Занятия" />
+                            <TableColumn fx:id="scheduleDateColumn" prefWidth="100" text="Дата" />
+                            <TableColumn fx:id="scheduleStartTimeColumn" text="Начало" />
+                            <TableColumn fx:id="scheduleEndTimeColumn" text="Конец" />
+                            <TableColumn fx:id="scheduleClientColumn" prefWidth="150" text="Записанный клиент" />
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                    <HBox alignment="CENTER" spacing="10">
+                        <Button fx:id="addScheduleButton" onAction="#handleAddScheduleEntry" styleClass="btn-primary" text="Добавить занятие" />
+                        <Button fx:id="cancelVisitButton" onAction="#handleCancelVisit" styleClass="btn-secondary" text="Отменить визит клиента" />
+                    </HBox>
+                </VBox>
+            </HBox>
+        </Tab>
+
+        <Tab text="Статистика и Отчеты">
+            <VBox alignment="TOP_CENTER" spacing="15" style="-fx-padding: 15;">
+                <Label styleClass="title" text="Конфигуратор отчетов" />
+
+                <!-- Основные настройки -->
+                <GridPane alignment="TOP_CENTER" hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="400.0" />
+                        <ColumnConstraints halignment="RIGHT" prefWidth="200.0" />
+                        <ColumnConstraints prefWidth="400.0" />
+                    </columnConstraints>
+               <HBox alignment="CENTER_LEFT">
+                  <children>
+      
+                          <!-- Левая колонка -->
+                          <Label text="Сущность для отчета:">
+                        <HBox.margin>
+                           <Insets right="5.0" />
+                        </HBox.margin>
+                     </Label>
+                          <ComboBox fx:id="reportEntityComboBox" prefHeight="52.0" prefWidth="127.0" />
+                  </children>
+               </HBox>
+               <VBox alignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="3">
+                  <children>
+      
+                          <Label text="Доступные поля:" />
+                          <TreeView fx:id="fieldsTreeView" prefHeight="200">
+                    </TreeView>
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <children>
+                        <Button onAction="#handleAddField" styleClass="btn-small" text="Добавить поле" />
+                        <Button onAction="#handleRemoveField" styleClass="btn-small" text="Удалить поле" />
+                        <Button onAction="#handleClearFields" styleClass="btn-small" text="Очистить поля" />
+                  </children>
+               </VBox>
+                <VBox alignment="CENTER" prefHeight="200" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <children>
+
+                                             <Button onAction="#handleAddGroupBy" styleClass="btn-small" text="Добавить группу" />
+                        <Button onAction="#handleRemoveGroupBy" styleClass="btn-small" text="Удалить группу" />
+                        <Button onAction="#handleClearGroupBy" styleClass="btn-small" text="Очистить группу" />
+                    </children>
+                </VBox>
+               <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <children>
+      
+                                      <!-- Правая колонка -->
+                          <Label text="Выбранные поля:" />
+                          <ListView fx:id="selectedFieldsListView" prefHeight="104.0" prefWidth="363.0">
+                              <placeholder>
+                                  <Label text="Перетащите поля сюда или используйте кнопки →" />
+                              </placeholder>
+                          </ListView>
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <children>
+      
+                                                  <Label text="Группировка по полям:" />
+                          <ListView fx:id="groupByListView" prefHeight="100" />
+                  </children>
+               </VBox>
+               <rowConstraints>
+                  <RowConstraints maxHeight="47.0" minHeight="36.0" prefHeight="36.0" />
+                  <RowConstraints maxHeight="156.0" minHeight="95.0" prefHeight="102.0" />
+                  <RowConstraints maxHeight="104.0" minHeight="98.0" prefHeight="104.0" />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <!-- Фильтры и сортировка -->
+                <TitledPane text="Дополнительные настройки">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Фильтрация по дате:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <DatePicker fx:id="reportDateFromPicker" promptText="С" />
+                            <DatePicker fx:id="reportDateToPicker" promptText="По" />
+                        </HBox>
+
+                        <Label text="Условия фильтрации:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <HBox alignment="CENTER_LEFT" spacing="5">
+                                <ComboBox fx:id="filterFieldCombo" promptText="Поле" />
+                                <ComboBox fx:id="filterOperatorCombo" promptText="Оператор" />
+                                <TextField fx:id="filterValueField" promptText="Значение" />
+                                <Button onAction="#handleAddFilter" styleClass="btn-small" text="+" />
+                            </HBox>
+                        </VBox>
+
+                        <Label text="Сортировка:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <HBox alignment="CENTER_LEFT" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <ComboBox fx:id="sortFieldCombo" prefHeight="52.0" prefWidth="105.0" promptText="Поле" />
+                            <ComboBox fx:id="sortOrderCombo" prefHeight="52.0" prefWidth="130.0" promptText="Порядок" />
+                            <Button onAction="#handleClearSort" prefHeight="29.0" prefWidth="166.0" styleClass="btn-small" text="Очистить сортировку" />
+                        </HBox>
+                         <ListView fx:id="activeFiltersListView" prefHeight="80" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <columnConstraints>
+                     <ColumnConstraints maxWidth="130.0" minWidth="119.0" prefWidth="130.0" />
+                     <ColumnConstraints maxWidth="487.0" minWidth="445.0" prefWidth="487.0" />
+                     <ColumnConstraints maxWidth="242.0" minWidth="204.0" prefWidth="204.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+                    </GridPane>
+                </TitledPane>
+
+                <!-- Управление отчетом -->
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="Название компании:" />
+                    <TextField fx:id="companyNameField" prefWidth="200" promptText="Введите название" />
+                    <ComboBox fx:id="reportOutputFormatComboBox" promptText="Формат" />
+                    <Button fx:id="generateReportButton" onAction="#handleGenerateReport" styleClass="btn-primary" text="Сформировать" />
+                    <Button fx:id="printReportButton" onAction="#handlePrintReport" styleClass="btn-secondary" text="Экспорт" />
+                    <Button fx:id="viewReportButton" onAction="#handleViewReport" styleClass="btn-secondary" text="Просмотр" />
+                </HBox>
+
+                <TextArea fx:id="reportStatusArea" editable="false" prefHeight="60" wrapText="true" />
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>

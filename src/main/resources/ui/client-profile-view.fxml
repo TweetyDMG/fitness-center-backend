@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" spacing="15" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.ClientProfileController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <Label styleClass="title" text="Мой профиль" />
+    <GridPane fx:id="profileGrid" alignment="CENTER" hgap="10" styleClass="grid-pane" stylesheets="@style.css" vgap="10">
+        <Label styleClass="subtitle" text="Имя:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="firstNameField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label styleClass="subtitle" text="Фамилия:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="lastNameField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label styleClass="subtitle" text="Отчество:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="patronymicField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label styleClass="subtitle" text="Телефон:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="phoneField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label styleClass="subtitle" text="Пол:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="genderField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label styleClass="subtitle" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="emailField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label styleClass="subtitle" text="Паспорт:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <TextField fx:id="passportField" editable="false" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+    <HBox alignment="CENTER" spacing="10">
+        <Button fx:id="editButton" onAction="#handleEditProfile" styleClass="btn-secondary" stylesheets="@style.css" text="Редактировать профиль" />
+        <Button fx:id="saveButton" onAction="#handleSaveProfile" styleClass="btn-primary" text="Сохранить изменения" visible="false" />
+        <Button fx:id="cancelButton" onAction="#handleCancelEdit" styleClass="btn-secondary" text="Отмена" visible="false" />
+    </HBox>
+</VBox>

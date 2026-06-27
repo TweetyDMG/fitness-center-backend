@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<VBox spacing="25" alignment="TOP_CENTER" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.ClientSubscriptionsController">
+    <padding>
+        <Insets top="25" right="30" bottom="30" left="30"/>
+    </padding>
+    <Label text="Мои Абонементы" styleClass="title-large"/>
+
+    <VBox fx:id="currentSubscriptionCard" spacing="15" styleClass="subscription-card" managed="false" visible="false">
+        <padding>
+            <Insets top="20" right="25" bottom="20" left="25"/>
+        </padding>
+        <Label fx:id="currentCardTitleLabel" styleClass="card-title"/>
+        <GridPane hgap="10" vgap="10" styleClass="card-grid">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="180.0"/> <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/> </columnConstraints>
+
+            <Label text="Название:" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="info-label"/>
+            <Label fx:id="subNameValue" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="info-value-highlight" wrapText="true"/>
+
+            <Label text="Статус:" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="info-label"/>
+            <Label fx:id="subStatusValue" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="info-value"/>
+
+            <Label text="Действителен до:" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="info-label"/>
+            <Label fx:id="subEndDateValue" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="info-value"/>
+
+            <Label text="Дата покупки:" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="info-label"/>
+            <Label fx:id="subPurchaseDateValue" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="info-value"/>
+
+            <Label text="Стоимость:" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="info-label"/>
+            <Label fx:id="subPriceValue" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="info-value"/>
+
+            <Label fx:id="subVisitsHeaderLabel" text="Посещения:" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="info-label" managed="false" visible="false"/>
+            <Label fx:id="subVisitsValue" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="info-value" managed="false" visible="false"/>
+
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+    </VBox>
+
+    <Label fx:id="noSubscriptionMessageLabel" text="Информация о ваших абонементах не найдена." styleClass="placeholder-text-large" managed="false" visible="false"/>
+
+    <VBox fx:id="historyPane" spacing="10" managed="false" visible="false" alignment="TOP_CENTER">
+        <padding>
+            <Insets top="20"/>
+        </padding>
+        <Label text="История Покупок" styleClass="title-medium"/>
+        <TableView fx:id="subscriptionsTable" styleClass="table-view-compact">
+            <columns>
+                <TableColumn fx:id="subNameColumn" text="Название" prefWidth="200"/>
+                <TableColumn fx:id="subPurchaseDateColumn" text="Дата покупки" prefWidth="120"/>
+                <TableColumn fx:id="subEndDateColumn" text="Дата окончания" prefWidth="120"/>
+                <TableColumn fx:id="subStatusColumn" text="Статус" prefWidth="100"/>
+            </columns>
+            <placeholder>
+                <Label text="Нет записей в истории."/>
+            </placeholder>
+        </TableView>
+    </VBox>
+</VBox>

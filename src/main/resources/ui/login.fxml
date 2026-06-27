@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane styleClass="login-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.LoginController">
+    <VBox fx:id="loginBox" alignment="CENTER" spacing="20" prefWidth="800" prefHeight="800" styleClass="login-box">
+        <padding>
+            <Insets bottom="30" left="30" right="30" top="30" />
+        </padding>
+
+        <ImageView fitHeight="60" fitWidth="60">
+            <Image url="@../images/logo.png"/>
+        </ImageView>
+
+        <Label styleClass="welcome-title" text="Добро пожаловать в Fitness Pro" />
+        <Label styleClass="subtitle" text="Войдите или зарегистрируйтесь, чтобы начать тренировки" />
+
+        <TextField fx:id="usernameField" promptText="Логин" styleClass="text-input" />
+        <PasswordField fx:id="passwordField" promptText="Пароль" styleClass="text-input" />
+
+        <HBox alignment="CENTER" spacing="15">
+            <Button fx:id="loginButton" styleClass="btn-primary" text="Войти" />
+            <Button fx:id="registerButton" styleClass="btn-secondary" text="Зарегистрироваться" />
+        </HBox>
+
+        <Button fx:id="forgotPasswordButton" styleClass="btn-link" text="Забыли пароль?" />
+    </VBox>
+</AnchorPane>

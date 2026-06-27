@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # ---------------------------------------------------------------------------
+  # Microsoft SQL Server 2022
+  # ---------------------------------------------------------------------------
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: fitness-mssql
+    environment:
+      SA_PASSWORD: "${MSSQL_SA_PASSWORD:-YourStrong!Passw0rd}"
+      ACCEPT_EULA: "Y"
+      MSSQL_DATABASE: "FitnessCenter"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"${MSSQL_SA_PASSWORD}\" -Q \"SELECT 1\"" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - fitness-network
+    restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # Fitness Center Backend (Spring Boot)
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fitness-backend
+    environment:
+      # Database
+      SPRING_DATASOURCE_URL: "jdbc:sqlserver://mssql:1433;databaseName=FitnessCenter;encrypt=true;trustServerCertificate=true"
+      SPRING_DATASOURCE_USERNAME: "sa"
+      SPRING_DATASOURCE_PASSWORD: "${MSSQL_SA_PASSWORD:-YourStrong!Passw0rd}"
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+
+      # JPA / Hibernate
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "validate"
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_OPEN_IN_VIEW: "false"
+
+      # JWT
+      JWT_SECRET: "${JWT_SECRET}"
+      JWT_EXPIRATION: "86400000"
+
+      # Swagger / OpenAPI
+      SPRINGDOC_SWAGGER_UI_ENABLED: "true"
+      SPRINGDOC_API_DOCS_ENABLED: "true"
+      SPRINGDOC_SWAGGER_UI_PATH: "/swagger-ui.html"
+
+      # Server
+      SERVER_PORT: "8080"
+
+      # Actuator
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,metrics,prometheus"
+      MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: "always"
+
+      # JVM
+      JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      mssql:
+        condition: service_healthy
+    networks:
+      - fitness-network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+# ---------------------------------------------------------------------------
+# Networks
+# ---------------------------------------------------------------------------
+networks:
+  fitness-network:
+    driver: bridge
+
+# ---------------------------------------------------------------------------
+# Volumes
+# ---------------------------------------------------------------------------
+volumes:
+  mssql_data:
+    driver: local

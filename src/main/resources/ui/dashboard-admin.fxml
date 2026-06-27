@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tooltip?>
+
+<VBox fx:id="adminBox" alignment="CENTER" spacing="20" prefWidth="800" prefHeight="800" styleClass="login-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.AdminController">
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30" />
+    </padding>
+
+    <ImageView fitHeight="60" fitWidth="60">
+        <image>
+            <Image url="@../images/logo.png" />
+        </image>
+    </ImageView>
+
+    <Label styleClass="welcome-title" text="Панель администратора" />
+    <Label styleClass="subtitle" text="Управление фитнес-центром Fitness Pro" />
+
+    <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+        <!-- Пользователи -->
+        <Tab text="Пользователи">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER">
+                    <TextField fx:id="userSearchField" promptText="Поиск по имени" styleClass="text-input">
+                        <tooltip>
+                            <Tooltip text="Введите имя пользователя для поиска" />
+                        </tooltip>
+                    </TextField>
+                    <Button fx:id="userSearchButton" styleClass="btn-primary" text="Поиск" />
+                </HBox>
+                <TableView fx:id="userTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="userIdColumn" text="ID" prefWidth="50" />
+                        <TableColumn fx:id="usernameColumn" text="Имя пользователя" prefWidth="150" />
+                        <TableColumn fx:id="roleColumn" text="Роль" prefWidth="100" />
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="addUserButton" styleClass="btn-primary" text="Добавить" />
+                    <Button fx:id="editUserButton" styleClass="btn-secondary" text="Редактировать" />
+                    <Button fx:id="deleteUserButton" styleClass="btn-secondary" text="Удалить" />
+                </HBox>
+            </VBox>
+        </Tab>
+        <!-- Клиенты -->
+        <Tab text="Клиенты">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER">
+                    <TextField fx:id="clientSearchField" promptText="Поиск по имени" styleClass="text-input">
+                        <tooltip>
+                            <Tooltip text="Введите имя клиента для поиска" />
+                        </tooltip>
+                    </TextField>
+                    <Button fx:id="clientSearchButton" styleClass="btn-primary" text="Поиск" />
+                </HBox>
+                <TableView fx:id="clientTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="clientIdColumn" text="ID" prefWidth="50" />
+                        <TableColumn fx:id="clientFirstNameColumn" text="Имя" prefWidth="100" />
+                        <TableColumn fx:id="clientLastNameColumn" text="Фамилия" prefWidth="100" />
+                        <TableColumn fx:id="clientPhoneColumn" text="Телефон" prefWidth="100" />
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="addClientButton" styleClass="btn-primary" text="Добавить" />
+                    <Button fx:id="editClientButton" styleClass="btn-secondary" text="Редактировать" />
+                    <Button fx:id="deleteClientButton" styleClass="btn-secondary" text="Удалить" />
+                </HBox>
+            </VBox>
+        </Tab>
+        <!-- Тренеры -->
+        <Tab text="Тренеры">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER">
+                    <TextField fx:id="trainerSearchField" promptText="Поиск по имени" styleClass="text-input">
+                        <tooltip>
+                            <Tooltip text="Введите имя тренера для поиска" />
+                        </tooltip>
+                    </TextField>
+                    <Button fx:id="trainerSearchButton" styleClass="btn-primary" text="Поиск" />
+                </HBox>
+                <TableView fx:id="trainerTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="trainerIdColumn" text="ID" prefWidth="50" />
+                        <TableColumn fx:id="trainerFirstNameColumn" text="Имя" prefWidth="100" />
+                        <TableColumn fx:id="trainerLastNameColumn" text="Фамилия" prefWidth="100" />
+                        <TableColumn fx:id="trainerPhoneColumn" text="Телефон" prefWidth="100" />
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="addTrainerButton" styleClass="btn-primary" text="Добавить" />
+                    <Button fx:id="editTrainerButton" styleClass="btn-secondary" text="Редактировать" />
+                    <Button fx:id="deleteTrainerButton" styleClass="btn-secondary" text="Удалить" />
+                </HBox>
+            </VBox>
+        </Tab>
+        <!-- Абонементы -->
+        <Tab text="Абонементы">
+            <VBox spacing="10">
+                <HBox spacing="10" alignment="CENTER">
+                    <TextField fx:id="subscriptionSearchField" promptText="Поиск по названию" styleClass="text-input">
+                        <tooltip>
+                            <Tooltip text="Введите название абонемента для поиска" />
+                        </tooltip>
+                    </TextField>
+                    <Button fx:id="subscriptionSearchButton" styleClass="btn-primary" text="Поиск" />
+                </HBox>
+                <TableView fx:id="subscriptionTable" prefHeight="200">
+                    <columns>
+                        <TableColumn fx:id="subscriptionIdColumn" text="ID" prefWidth="50" />
+                        <TableColumn fx:id="subscriptionNameColumn" text="Название" prefWidth="150" />
+                        <TableColumn fx:id="subscriptionPriceColumn" text="Цена" prefWidth="100" />
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="addSubscriptionButton" styleClass="btn-primary" text="Добавить" />
+                    <Button fx:id="editSubscriptionButton" styleClass="btn-secondary" text="Редактировать" />
+                    <Button fx:id="deleteSubscriptionButton" styleClass="btn-secondary" text="Удалить" />
+                </HBox>
+            </VBox>
+        </Tab>
+    </TabPane>
+
+    <Button fx:id="logoutButton" styleClass="btn-link" text="Выйти" />
+</VBox>

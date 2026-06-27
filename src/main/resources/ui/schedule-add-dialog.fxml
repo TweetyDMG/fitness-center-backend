@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="384.0" prefWidth="669.0" spacing="20.0" styleClass="login-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.ScheduleAddDialogController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="trainerLabel" styleClass="title" text="Добавление занятия для тренера: Имя Тренера" textAlignment="CENTER" wrapText="true">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Label>
+
+    <GridPane alignment="CENTER" hgap="10.0" prefHeight="171.0" prefWidth="398.0" vgap="10.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label styleClass="subtitle" text="Дата:" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <DatePicker fx:id="datePicker" prefHeight="30.0" prefWidth="200.0" styleClass="date-picker" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+
+            <Label styleClass="subtitle" text="Время начала (HH:mm):" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField fx:id="startTimeField" promptText="HH:mm" styleClass="text-input" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+
+            <Label styleClass="subtitle" text="Время окончания (HH:mm):" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <TextField fx:id="endTimeField" prefHeight="48.0" prefWidth="234.0" promptText="HH:mm" styleClass="text-input" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        </children>
+        <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+        </VBox.margin>
+    </GridPane>
+
+    <HBox alignment="TOP_CENTER" spacing="10.0">
+        <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAdd" prefHeight="40.0" prefWidth="128.0" styleClass="btn-primary" text="Добавить" />
+        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" prefWidth="100.0" styleClass="btn-secondary" text="Отмена" />
+    </HBox>
+</VBox>

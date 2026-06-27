@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Priority?>
+
+<VBox alignment="TOP_CENTER" spacing="15" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.ClientScheduleController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <Label styleClass="header-title" text="Расписание занятий" /> <HBox alignment="CENTER_LEFT" spacing="10" styleClass="filter-box">
+    <padding>
+        <Insets bottom="5" top="5" />
+    </padding>
+    <Label text="Выберите дату:" styleClass="filter-label" />
+    <DatePicker fx:id="dateFilterPicker" styleClass="date-picker-minimal" promptText="Фильтр по дате"/>
+</HBox>
+    <TableView fx:id="scheduleTable" styleClass="data-table-minimal" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="schDateCol" text="Дата" prefWidth="100"/>
+            <TableColumn fx:id="schStartTimeCol" text="Начало" prefWidth="80"/>
+            <TableColumn fx:id="schEndTimeCol" text="Конец" prefWidth="80"/>
+            <TableColumn fx:id="schTrainerCol" text="Тренер" prefWidth="180"/>
+            <TableColumn fx:id="schActionCol" text="Действие" prefWidth="120" style="-fx-alignment: CENTER;"/>
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+    </TableView>
+</VBox>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="481.0" prefWidth="1016.0" spacing="20" styleClass="content-area" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fitnesscenter.ui.ClientDetailsDialogController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label styleClass="section-title" text="Информация о клиенте" HBox.hgrow="ALWAYS" />
+        <Button fx:id="closeButton" onAction="#handleClose" styleClass="btn-secondary" text="Закрыть" />
+    </HBox>
+
+
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+
+        <VBox spacing="10" styleClass="info-card" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+            <Label styleClass="card-title" text="Основная информация" />
+            <GridPane hgap="10" mouseTransparent="true" vgap="5">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="15.0" />
+                    <ColumnConstraints percentWidth="85.0" />
+                </columnConstraints>
+                <Label styleClass="info-label" text="Имя:" GridPane.rowIndex="0" />
+                <Label fx:id="clientNameLabel" styleClass="info-value-highlight" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label styleClass="info-label" text="Контакт:" GridPane.rowIndex="1" />
+                <Label fx:id="clientContactLabel" styleClass="info-value" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label styleClass="info-label" text="Возраст:" GridPane.rowIndex="2" />
+                <Label fx:id="clientAgeLabel" styleClass="info-value" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+        </VBox>
+
+        <VBox spacing="10" styleClass="info-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label styleClass="card-title" text="Предпочтения" />
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="preferencesContainer" spacing="5" />
+            </ScrollPane>
+        </VBox>
+
+        <VBox spacing="10" styleClass="info-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label styleClass="card-title" text="Медицинские противопоказания" />
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="diseasesContainer" spacing="5" />
+            </ScrollPane>
+        </VBox>
+
+        <VBox spacing="10" styleClass="info-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label styleClass="card-title" text="Мои рекомендации" />
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="recommendationsContainer" spacing="5" />
+            </ScrollPane>
+        </VBox>
+    </GridPane>
+
+    <VBox fx:id="recommendationDialog" managed="false" spacing="15" styleClass="dialog-section" visible="false">
+        <Label styleClass="section-title" text="Добавить новую рекомендацию" />
+
+        <VBox spacing="10">
+            <Label styleClass="info-label" text="Текст рекомендации:" />
+            <TextArea fx:id="recommendationTextArea" prefRowCount="4" promptText="Введите рекомендацию для клиента..." styleClass="text-area" wrapText="true" />
+        </VBox>
+
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Button fx:id="saveRecommendationBtn" onAction="#handleSaveRecommendation" styleClass="btn-primary" text="Сохранить" />
+            <Button fx:id="cancelRecommendationBtn" onAction="#handleCancelRecommendation" styleClass="btn-secondary" text="Отмена" />
+        </HBox>
+    </VBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="15" VBox.vgrow="NEVER">
+        <Button fx:id="addRecommendationBtn" onAction="#handleAddRecommendation" styleClass="btn-primary" text="Добавить рекомендацию" />
+        <Button fx:id="viewClientHistoryBtn" onAction="#handleViewClientHistory" styleClass="btn-secondary" text="История посещений" />
+    </HBox>
+
+</VBox>
